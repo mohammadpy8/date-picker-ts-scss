@@ -34,25 +34,64 @@ $month-box: #00891d;
 
 .monthBox {
   background-color: $month-box;
-  width: 150px;
+  width: 120px;
   height: 250px;
   border-radius: 15px;
   top: 65px;
   position: absolute;
   overflow: hidden;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: "4px";
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: "#0000001f !important";
-  }
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 35px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   li {
     list-style: none;
     cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    color: #fff;
+  }
+}
+
+.monthBox::-webkit-scrollbar {
+  display: none !important;
+}
+
+.yearBox {
+  background-color: $month-box;
+  width: 120px;
+  height: 250px;
+  border-radius: 15px;
+  top: 65px;
+  left: 150px;
+  position: absolute;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 35px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  li {
+    list-style: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    color: #fff;
   }
 }
 
 .activeMonth {
-  background-color: red;
+  background-color: rgb(204, 204, 204);
+  color: #333 !important;
 }

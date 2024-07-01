@@ -1,0 +1,10 @@
+html,
+body,
+* {
+  &::-webkit-scrollbar {
+    scrollbar-width: "4px";
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: "#0000001f !important";
+  }
+}
