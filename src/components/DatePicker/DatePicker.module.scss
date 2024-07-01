@@ -1,0 +1,58 @@
+$date-picker-box: #e2e2e2;
+$date-picker-items: #00de2f;
+$month-box: #00891d;
+
+.datePicker {
+  position: relative;
+}
+
+.datePickerContainer {
+  width: 420px;
+  height: 75px;
+  background-color: $date-picker-box;
+  border-radius: 15px;
+  .datePickerItems {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 45px;
+    .datePickerItem {
+      width: 100px;
+      height: 50px;
+      background-color: $date-picker-items;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 150ms ease-in;
+    }
+  }
+}
+
+.monthBox {
+  background-color: $month-box;
+  width: 150px;
+  height: 250px;
+  border-radius: 15px;
+  top: 65px;
+  position: absolute;
+  overflow: hidden;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: "4px";
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: "#0000001f !important";
+  }
+  li {
+    list-style: none;
+    cursor: pointer;
+  }
+}
+
+.activeMonth {
+  background-color: red;
+}

@@ -1,0 +1,20 @@
+$primary-color: #64ff00;
+$main-color: #ff0;
+
+:export {
+  primaryColor: $primary-color;
+}
+
+.main-box {
+  width: 150px;
+  height: 150px;
+  background-color: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .box {
+    width: 50px;
+    height: 50px;
+    background-color: $main-color;
+  }
+}
