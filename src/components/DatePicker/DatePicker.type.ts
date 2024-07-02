@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from "react";
+
 type TYearsData = {
   id: number;
   year: string;
@@ -13,4 +15,8 @@ type TDayData = {
   day: string;
 }[];
 
-export type { TYearsData, TMonthsData, TDayData };
+type TDatePickerProps = {
+  setGetDate: Dispatch<SetStateAction<string>>;
+};
+
+export type { TYearsData, TMonthsData, TDayData, TDatePickerProps };

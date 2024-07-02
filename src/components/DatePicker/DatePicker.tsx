@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { collectionDaysOfMonths, mounthListCollection } from "./DatePicker.constant";
 
 import styles from "./DatePicker.module.scss";
-import type { TDayData, TMonthsData, TYearsData } from "./DatePicker.type";
+import type { TDayData, TMonthsData, TYearsData, TDatePickerProps } from "./DatePicker.type";
 
 import { useOutsideClickDatePicker } from "./DatePicker.hook";
 
-function DatePicker() {
+function DatePicker({ setGetDate }: TDatePickerProps) {
   const [openListMonth, setOpenListMonth] = useState<boolean>(false);
   const [openListYear, setOpenListYear] = useState<boolean>(false);
   const [openListDay, setOpenListDay] = useState<boolean>(false);
@@ -105,6 +105,10 @@ function DatePicker() {
 
   const showDay = handleDayShow();
   const currentDate = becomeDate();
+
+  useEffect(() => {
+    setGetDate(currentDate);
+  }, [days, months, years, date_day, date_month, date_year]);
 
   useOutsideClickDatePicker(dayRef, "day-layout", () => setOpenListDay(false));
   useOutsideClickDatePicker(monthRef, "month-layout", () => setOpenListMonth(false));
