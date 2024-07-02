@@ -17,7 +17,7 @@ function DatePicker() {
   const [months, setMonths] = useState<TMonthsData>([]);
   const [years, setYears] = useState<TYearsData>([]);
 
-  console.log(days, months, years);
+  // console.log(days, months, years);
 
   const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
@@ -88,6 +88,14 @@ function DatePicker() {
     return;
   };
 
+  const handleDayShow = () => {
+    const findDay = daysData.filter((dayCol) => dayCol?.day === days[0].day);
+    if (findDay.length > 0) return days[0].day;
+    else return "انتخاب";
+  };
+
+  const showDay = handleDayShow();
+
   return (
     <div className={styles.datePicker}>
       <div className={styles.datePickerContainer}>
@@ -99,7 +107,7 @@ function DatePicker() {
             <span>{`سال/${years[0]?.year}`}</span>
           </div>
           <div className={styles.datePickerItem} onClick={() => setOpenListDay((perv) => !perv)}>
-            <span>{`روز/${days[0]?.day}`}</span>
+            <span>{`روز/${showDay}`}</span>
           </div>
         </div>
       </div>
