@@ -12,12 +12,25 @@ function DatePicker() {
   const [idMonth, setIdMonth] = useState<number>(0);
   const [idYear, setIdYear] = useState<number>(0);
 
+  const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+  const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
+
+  const persianDate = () => {
+    const date = new Date().toLocaleDateString("fa").split("/");
+    const createCurrentMonth = convertFaToEn(String(date[1]));
+    if(Number(createCurrentMonth) > 9) {
+      return [date[0], createCurrentMonth, date[2]]
+    } else {
+      return [date[0]]
+    }
+  };
+
+  console.log("persinadat", persianDate());
+
   const generateYear = (): TYearsData => {
     let years = [];
     let startYear = 1340;
     let findYear = new Date().toLocaleDateString("fa").split("/")[0];
-    const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
-    const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
     const endYear = convertFaToEn(findYear);
     for (let i = startYear; i <= Number(endYear); i++) {
       if (i >= startYear) {
@@ -36,7 +49,6 @@ function DatePicker() {
   const findYear = yearsData.filter((item) => item.id === idYear);
 
   const becomeDate = () => {
-    const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
     if (findMonth.length > 0 && findYear.length > 0) {
       const year = findYear[0].year;
       const month = findMonth[0].value;
