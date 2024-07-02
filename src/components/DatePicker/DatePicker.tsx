@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, LegacyRef } from "react";
 import { mounthListCollection, collectionDaysOfMonths } from "./DatePicker.constant";
 
 import styles from "./DatePicker.module.scss";
 import type { TYearsData, TDayData, TMonthsData } from "./DatePicker.type";
+
+import { useOutsideClickDatePicker } from "./DatePicker.hook";
 
 function DatePicker() {
   const [openListMonth, setOpenListMonth] = useState<boolean>(false);
@@ -17,7 +19,9 @@ function DatePicker() {
   const [months, setMonths] = useState<TMonthsData>([]);
   const [years, setYears] = useState<TYearsData>([]);
 
-  // console.log(days, months, years);
+  const dayRef = useRef<HTMLUListElement | null>(null);
+  const monthRef = useRef<HTMLUListElement | null>(null);
+  const yearRef = useRef<HTMLUListElement | null>(null);
 
   const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
@@ -96,6 +100,10 @@ function DatePicker() {
 
   const showDay = handleDayShow();
 
+  useOutsideClickDatePicker(dayRef, "day-layout", () => setOpenListDay(false));
+  useOutsideClickDatePicker(monthRef, "month-layout", () => setOpenListMonth(false));
+  useOutsideClickDatePicker(yearRef, "year-layout", () => setOpenListYear(false));
+
   return (
     <div className={styles.datePicker}>
       <div className={styles.datePickerContainer}>
@@ -113,7 +121,7 @@ function DatePicker() {
       </div>
       <div>
         {openListMonth && (
-          <ul className={styles.monthBox}>
+          <ul className={styles.monthBox} ref={monthRef} id="month-layout">
             {mounthListCollection.map((item, index) => {
               return (
                 <li
@@ -131,7 +139,7 @@ function DatePicker() {
           </ul>
         )}
         {openListYear && (
-          <ul className={styles.yearBox}>
+          <ul className={styles.yearBox} ref={yearRef} id="year-layout">
             {yearsData.map((item) => {
               return (
                 <li
@@ -149,7 +157,7 @@ function DatePicker() {
           </ul>
         )}
         {openListDay && (
-          <ul className={styles.dayBox}>
+          <ul className={styles.dayBox} ref={dayRef} id="day-layout">
             {daysData.map((item) => {
               return (
                 <li
