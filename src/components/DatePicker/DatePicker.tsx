@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef, LegacyRef } from "react";
-import { mounthListCollection, collectionDaysOfMonths } from "./DatePicker.constant";
+import { useEffect, useRef, useState } from "react";
+import { collectionDaysOfMonths, mounthListCollection } from "./DatePicker.constant";
 
 import styles from "./DatePicker.module.scss";
-import type { TYearsData, TDayData, TMonthsData } from "./DatePicker.type";
+import type { TDayData, TMonthsData, TYearsData } from "./DatePicker.type";
 
 import { useOutsideClickDatePicker } from "./DatePicker.hook";
 
@@ -184,3 +184,4 @@ function DatePicker() {
 }
 
 export { DatePicker };
+
