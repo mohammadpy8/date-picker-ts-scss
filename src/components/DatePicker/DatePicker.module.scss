@@ -119,6 +119,18 @@ $month-box: #00891d;
   }
 }
 
+.datePickerToday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: bold;
+  padding: 5px 0;
+  border-radius: 15px;
+  background-color: red;
+  width: 150px;
+}
+
 .activeMonth {
   background-color: rgb(204, 204, 204);
   color: #333 !important;

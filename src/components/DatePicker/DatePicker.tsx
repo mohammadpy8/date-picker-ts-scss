@@ -83,13 +83,13 @@ function DatePicker() {
     if (months.length > 0 && years.length > 0) {
       const year = years[0].year;
       const month = months[0].value;
-      const day = 0;
-      const date = `${year}/${
-        month < 10 ? convertEnToFa(String("0" + month)) : convertEnToFa(String(month))
-      }/${convertEnToFa(String(day))}`;
+      const day = days[0].day;
+      const date = `${year}/${month < 10 ? convertEnToFa(String("0" + month)) : convertEnToFa(String(month))}/${
+        convertFaToEn(day) < 10 ? convertEnToFa(String("0" + day)) : day
+      }`;
       return date;
     }
-    return;
+    return "تاریخ امروز";
   };
 
   const handleDayShow = () => {
@@ -99,6 +99,7 @@ function DatePicker() {
   };
 
   const showDay = handleDayShow();
+  const currentDate = becomeDate();
 
   useOutsideClickDatePicker(dayRef, "day-layout", () => setOpenListDay(false));
   useOutsideClickDatePicker(monthRef, "month-layout", () => setOpenListMonth(false));
@@ -118,6 +119,9 @@ function DatePicker() {
             <span>{`روز/${showDay}`}</span>
           </div>
         </div>
+      </div>
+      <div className={styles.datePickerToday}>
+        <span>{currentDate}</span>
       </div>
       <div>
         {openListMonth && (
