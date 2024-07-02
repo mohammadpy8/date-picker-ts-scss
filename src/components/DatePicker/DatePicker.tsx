@@ -8,7 +8,7 @@ import type { TDayData, TMonthsData, TYearsData, TDatePickerProps } from "./Date
 
 import { useOutsideClickDatePicker } from "./DatePicker.hook";
 
-function DatePicker({ setGetDate }: TDatePickerProps) {
+function DatePicker({ setGetDate, setTime }: TDatePickerProps) {
   const [openListMonth, setOpenListMonth] = useState<boolean>(false);
   const [openListYear, setOpenListYear] = useState<boolean>(false);
   const [openListDay, setOpenListDay] = useState<boolean>(false);
@@ -75,6 +75,20 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
   const daysData = generateDays();
   const [date_year, date_month, date_day] = persianDate();
 
+  const everyDayDate = () => {
+    const date = new Date().toLocaleDateString("fa").split("/");
+    const year = date[0];
+    const changeMonth = convertFaToEn(date[1]);
+    const handleMonth = +changeMonth < 10 ? "0" + String(changeMonth) : changeMonth;
+    const month = convertEnToFa(handleMonth);
+    const changeDay = convertFaToEn(date[2]);
+    const handleDay = +changeDay < 10 ? "0" + String(changeDay) : changeDay;
+    const day = convertEnToFa(handleDay);
+    return year + "/" + month + "/" + day;
+  };
+
+  const getTodayDate = everyDayDate();
+
   useEffect(() => {
     setDays([{ id: +convertFaToEn(String(date_day)), day: date_day }]);
     setMonths([
@@ -84,6 +98,7 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
     setIdMonth(mounthListCollection.filter((item) => item.label === date_month)[0].value);
     setIdYear(+convertFaToEn(date_year));
     setIdDay(+convertFaToEn(String(date_day)));
+    setTime(getTodayDate);
   }, []);
 
   const becomeDate = () => {
@@ -107,20 +122,6 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
 
   const showDay = handleDayShow();
   const currentDate = becomeDate();
-
-  const everyDayDate = () => {
-    const date = new Date().toLocaleDateString("fa").split("/");
-    const year = date[0];
-    const changeMonth = convertFaToEn(date[1]);
-    const handleMonth = +changeMonth < 10 ? "0" + String(changeMonth) : changeMonth;
-    const month = convertEnToFa(handleMonth);
-    const changeDay = convertFaToEn(date[2]);
-    const handleDay = +changeDay < 10 ? "0" + String(changeDay) : changeDay;
-    const day = convertEnToFa(handleDay);
-    return year + "/" + month + "/" + day;
-  };
-
-  const getTodayDate = everyDayDate();
 
   useEffect(() => {
     setGetDate(currentDate);

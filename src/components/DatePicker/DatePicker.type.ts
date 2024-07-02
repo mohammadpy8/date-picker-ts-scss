@@ -17,6 +17,7 @@ type TDayData = {
 
 type TDatePickerProps = {
   setGetDate: Dispatch<SetStateAction<string>>;
+  setTime: Dispatch<SetStateAction<string>>;
 };
 
 export type { TYearsData, TMonthsData, TDayData, TDatePickerProps };

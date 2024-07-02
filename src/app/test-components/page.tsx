@@ -5,11 +5,12 @@ import { useState } from "react";
 
 function TestPage() {
   const [getDate, setGetDate] = useState<string>("");
-  console.log("getDate==>>", getDate);
+  const [time, setTime] = useState<string>("");
+  console.log("getDate==>>", getDate, time);
 
   return (
     <div>
-      <DatePicker setGetDate={setGetDate} />
+      <DatePicker setGetDate={setGetDate} setTime={setTime} />
     </div>
   );
 }
