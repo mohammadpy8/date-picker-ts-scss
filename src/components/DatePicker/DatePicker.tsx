@@ -12,6 +12,7 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
   const [openListMonth, setOpenListMonth] = useState<boolean>(false);
   const [openListYear, setOpenListYear] = useState<boolean>(false);
   const [openListDay, setOpenListDay] = useState<boolean>(false);
+  const [openDatePicker, setOpenDatePicker] = useState<boolean>(false);
   const [idMonth, setIdMonth] = useState<number>(0);
   const [idYear, setIdYear] = useState<number>(0);
   const [idDay, setIdDay] = useState<number>(0);
@@ -22,6 +23,7 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
   const dayRef = useRef<HTMLUListElement | null>(null);
   const monthRef = useRef<HTMLUListElement | null>(null);
   const yearRef = useRef<HTMLUListElement | null>(null);
+  const datePickerShowRef = useRef<HTMLDivElement | null>(null);
 
   const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
@@ -106,6 +108,20 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
   const showDay = handleDayShow();
   const currentDate = becomeDate();
 
+  const everyDayDate = () => {
+    const date = new Date().toLocaleDateString("fa").split("/");
+    const year = date[0];
+    const changeMonth = convertFaToEn(date[1]);
+    const handleMonth = +changeMonth < 10 ? "0" + String(changeMonth) : changeMonth;
+    const month = convertEnToFa(handleMonth);
+    const changeDay = convertFaToEn(date[2]);
+    const handleDay = +changeDay < 10 ? "0" + String(changeDay) : changeDay;
+    const day = convertEnToFa(handleDay);
+    return year + "/" + month + "/" + day;
+  };
+
+  const getTodayDate = everyDayDate();
+
   useEffect(() => {
     setGetDate(currentDate);
   }, [days, months, years, date_day, date_month, date_year]);
@@ -113,81 +129,91 @@ function DatePicker({ setGetDate }: TDatePickerProps) {
   useOutsideClickDatePicker(dayRef, "day-layout", () => setOpenListDay(false));
   useOutsideClickDatePicker(monthRef, "month-layout", () => setOpenListMonth(false));
   useOutsideClickDatePicker(yearRef, "year-layout", () => setOpenListYear(false));
+  useOutsideClickDatePicker(datePickerShowRef, "date-picker-layout", () => setOpenDatePicker(false));
 
   return (
     <div className={styles.datePicker}>
       <div className={styles.datePickerContainer}>
         <div className={styles.datePickerItems}>
-          <div className={styles.datePickerItem} onClick={() => setOpenListMonth((perv) => !perv)}>
-            <span>{`ماه/${months[0]?.label}`}</span>
+          <div className={styles.datePickerBox} onClick={() => setOpenDatePicker(true)}>
+            <div className={styles.datePickerItem}>
+              <span>{`ماه/${months[0]?.label}`}</span>
+            </div>
+            <div className={styles.datePickerItem}>
+              <span>{`سال/${years[0]?.year}`}</span>
+            </div>
+            <div className={styles.datePickerItem}>
+              <span>{`روز/${showDay}`}</span>
+            </div>
           </div>
-          <div className={styles.datePickerItem} onClick={() => setOpenListYear((perv) => !perv)}>
-            <span>{`سال/${years[0]?.year}`}</span>
-          </div>
-          <div className={styles.datePickerItem} onClick={() => setOpenListDay((perv) => !perv)}>
-            <span>{`روز/${showDay}`}</span>
+          <div className={styles.infoDatePicker}>
+            <div>
+              <span>تاریخ انتخاب شده :{currentDate}</span>
+            </div>
+            <div>
+              <span>تاریخ امروز:{getTodayDate}</span>
+            </div>
           </div>
         </div>
       </div>
-      <div className={styles.datePickerToday}>
-        <span>{currentDate}</span>
-      </div>
-      <div>
-        {openListMonth && (
-          <ul className={styles.monthBox} ref={monthRef} id="month-layout">
-            {mounthListCollection.map((item, index) => {
-              return (
-                <li
-                  key={index}
-                  className={idMonth === item.value ? styles.activeMonth : ""}
-                  onClick={() => {
-                    setIdMonth(item.value);
-                    setMonths(mounthListCollection.filter((monthCol) => monthCol.value === item.value));
-                  }}
-                >
-                  {item.label}
-                </li>
-              );
-            })}
-          </ul>
-        )}
-        {openListYear && (
-          <ul className={styles.yearBox} ref={yearRef} id="year-layout">
-            {yearsData.map((item) => {
-              return (
-                <li
-                  key={item.id}
-                  className={idYear === item.id ? styles.activeMonth : ""}
-                  onClick={() => {
-                    setIdYear(item.id);
-                    setYears(yearsData.filter((yearCol) => yearCol.id === item.id));
-                  }}
-                >
-                  {item.year}
-                </li>
-              );
-            })}
-          </ul>
-        )}
-        {openListDay && (
-          <ul className={styles.dayBox} ref={dayRef} id="day-layout">
-            {daysData.map((item) => {
-              return (
-                <li
-                  key={item.id}
-                  className={idDay === item.id ? styles.activeMonth : ""}
-                  onClick={() => {
-                    setIdDay(item.id);
-                    setDays(daysData.filter((dayCol) => dayCol.id === item.id));
-                  }}
-                >
-                  {item.day}
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+      {openDatePicker && (
+        <div className={styles.dateBoxItems} ref={datePickerShowRef} id="date-picker-layout">
+          <div>
+            <ul className={styles.dateShowBox} ref={monthRef} id="month-layout">
+              {mounthListCollection.map((item, index) => {
+                return (
+                  <li
+                    key={index}
+                    className={idMonth === item.value ? styles.activeMonth : ""}
+                    onClick={() => {
+                      setIdMonth(item.value);
+                      setMonths(mounthListCollection.filter((monthCol) => monthCol.value === item.value));
+                    }}
+                  >
+                    {item.label}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div>
+            <ul className={styles.dateShowBox} ref={yearRef} id="year-layout">
+              {yearsData.map((item) => {
+                return (
+                  <li
+                    key={item.id}
+                    className={idYear === item.id ? styles.activeMonth : ""}
+                    onClick={() => {
+                      setIdYear(item.id);
+                      setYears(yearsData.filter((yearCol) => yearCol.id === item.id));
+                    }}
+                  >
+                    {item.year}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div>
+            <ul className={styles.dateShowBox} ref={dayRef} id="day-layout">
+              {daysData.map((item) => {
+                return (
+                  <li
+                    key={item.id}
+                    className={idDay === item.id ? styles.activeMonth : ""}
+                    onClick={() => {
+                      setIdDay(item.id);
+                      setDays(daysData.filter((dayCol) => dayCol.id === item.id));
+                    }}
+                  >
+                    {item.day}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

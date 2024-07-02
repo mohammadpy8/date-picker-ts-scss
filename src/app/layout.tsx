@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
 import "@/scss/globals.scss";
 
-const inter = Vazirmatn({ subsets: ["arabic"] });
+const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body
-        className={inter.className}
+        className={vazir.className}
         style={{
           display: "flex",
           justifyContent: "center",

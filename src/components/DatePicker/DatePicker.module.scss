@@ -8,7 +8,7 @@ $month-box: #00891d;
 
 .datePickerContainer {
   width: 420px;
-  height: 75px;
+  height: 105px;
   background-color: $date-picker-box;
   border-radius: 15px;
   .datePickerItems {
@@ -16,7 +16,9 @@ $month-box: #00891d;
     height: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    // padding-top: 10px;
     column-gap: 45px;
     .datePickerItem {
       width: 100px;
@@ -37,8 +39,8 @@ $month-box: #00891d;
   width: 120px;
   height: 250px;
   border-radius: 15px;
-  top: 65px;
-  position: absolute;
+  // top: 65px;
+  // position: absolute;
   overflow: hidden;
   overflow-y: scroll;
   padding: 15px;
@@ -68,9 +70,9 @@ $month-box: #00891d;
   width: 120px;
   height: 250px;
   border-radius: 15px;
-  top: 65px;
-  left: 150px;
-  position: absolute;
+  // top: 65px;
+  // left: 150px;
+  // position: absolute;
   overflow: hidden;
   overflow-y: scroll;
   padding: 15px;
@@ -91,14 +93,51 @@ $month-box: #00891d;
   }
 }
 
+.datePickerBox {
+  width: 95%;
+  height: 50px;
+  background-color: $date-picker-items;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 35px;
+  cursor: pointer;
+}
+
 .dayBox {
   background-color: $month-box;
   width: 120px;
   height: 250px;
   border-radius: 15px;
-  top: 65px;
-  right: 0;
-  position: absolute;
+  // top: 65px;
+  // right: 0;
+  // position: absolute;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 35px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  li {
+    list-style: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    color: #fff;
+  }
+}
+
+.dateShowBox {
+  background-color: $month-box;
+  width: 100px;
+  height: 250px;
+  border-radius: 15px;
   overflow: hidden;
   overflow-y: scroll;
   padding: 15px;
@@ -134,4 +173,29 @@ $month-box: #00891d;
 .activeMonth {
   background-color: rgb(204, 204, 204);
   color: #333 !important;
+}
+
+.dateBoxItems {
+  width: 420px;
+  margin-top: 10px;
+  height: 300px;
+  border-radius: 15px;
+  background-color: $date-picker-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.infoDatePicker {
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  column-gap: 25px;
+  :first-child {
+    background-color: rgb(202, 202, 202);
+    padding: 5px 8px;
+    border-radius: 10px;
+  }
 }
