@@ -49,12 +49,17 @@ function DatePicker() {
     return years;
   };
 
+  const handleLeapYear = (valueDay: number, nameMonth: string): number => {
+    if (years[0]?.id % 4 === 0 && nameMonth === "اسفند") return valueDay + 1;
+    else return valueDay;
+  };
+
   const generateDays = () => {
     let days = [];
     const getMonth = months[0]?.label;
     const filterDays = collectionDaysOfMonths.filter((itemDay) => itemDay.months.includes(getMonth));
     if (filterDays) {
-      for (let i = 1; i <= filterDays[0]?.days; i++) {
+      for (let i = 1; i <= handleLeapYear(filterDays[0]?.days, months[0]?.label); i++) {
         days.push({
           id: i,
           day: convertEnToFa(String(i)),
@@ -184,4 +189,3 @@ function DatePicker() {
 }
 
 export { DatePicker };
-
