@@ -16,6 +16,7 @@ type TDayData = {
 }[];
 
 type TDatePickerProps = {
+  datePickerStartYear?: number;
   setGetDate: Dispatch<SetStateAction<string>>;
   setTime: Dispatch<SetStateAction<string>>;
 };
