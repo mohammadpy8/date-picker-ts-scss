@@ -91,6 +91,34 @@ $month-box: #00891d;
   }
 }
 
+.dayBox {
+  background-color: $month-box;
+  width: 120px;
+  height: 250px;
+  border-radius: 15px;
+  top: 65px;
+  right: 0;
+  position: absolute;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 35px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  li {
+    list-style: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    color: #fff;
+  }
+}
+
 .activeMonth {
   background-color: rgb(204, 204, 204);
   color: #333 !important;

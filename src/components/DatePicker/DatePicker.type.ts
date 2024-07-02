@@ -1,6 +1,16 @@
 type TYearsData = {
   id: number;
-  year: number;
+  year: string;
 }[];
 
-export type { TYearsData };
+type TMonthsData = {
+  value: number;
+  label: string;
+}[];
+
+type TDayData = {
+  id: number;
+  day: string;
+}[];
+
+export type { TYearsData, TMonthsData, TDayData };

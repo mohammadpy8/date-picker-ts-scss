@@ -28,4 +28,10 @@ const mounthListCollection = [
   { value: 12, label: "اسفند" },
 ];
 
-export { mounthList, mounthListCollection };
+const collectionDaysOfMonths = [
+  { days: 31, months: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور"] },
+  { days: 30, months: ["مهر", "آبان", "آذر", "دی", "بهمن"] },
+  { days: 29, months: ["اسفند"] },
+];
+
+export { mounthList, mounthListCollection, collectionDaysOfMonths };
