@@ -8,11 +8,7 @@ import type { TDayData, TMonthsData, TYearsData, TDatePickerProps } from "./Date
 
 import { useOutsideClickDatePicker } from "./DatePicker.hook";
 
-function DatePicker({
-  setGetDate = () => {},
-  setTime = () => {},
-  datePickerStartYear = 1340,
-}: TDatePickerProps) {
+function DatePicker({ setGetDate = () => {}, setTime = () => {}, datePickerStartYear = 1340 }: TDatePickerProps) {
   const [openListMonth, setOpenListMonth] = useState<boolean>(false);
   const [openListYear, setOpenListYear] = useState<boolean>(false);
   const [openListDay, setOpenListDay] = useState<boolean>(false);
@@ -56,8 +52,13 @@ function DatePicker({
   };
 
   const handleLeapYear = (valueDay: number, nameMonth: string): number => {
-    if (years[0]?.id % 4 === 0 && nameMonth === "اسفند") return valueDay + 1;
-    else return valueDay;
+    let check = [1, 5, 9, 13, 17, 22, 26, 30];
+    if (years[0]?.id >= 1343 && years[0]?.id <= 1472) {
+      let calc = years[0]?.id % 33;
+      let checkYearExist = check.filter((item) => item === calc);
+      if (checkYearExist.length > 0 && nameMonth === "اسفند") return valueDay + 1;
+      else return valueDay;
+    } else return valueDay;
   };
 
   const generateDays = () => {
@@ -110,9 +111,9 @@ function DatePicker({
       const year = years[0].year;
       const month = months[0].value;
       const day = days[0].day;
-      const date = `${year}/${
-        month < 10 ? convertEnToFa(String("0" + month)) : convertEnToFa(String(month))
-      }/${convertFaToEn(day) < 10 ? convertEnToFa(String("0" + day)) : day}`;
+      const date = `${year}/${month < 10 ? convertEnToFa(String("0" + month)) : convertEnToFa(String(month))}/${
+        convertFaToEn(day) < 10 ? convertEnToFa(String("0" + day)) : day
+      }`;
       return date;
     }
     return "تاریخ امروز";
