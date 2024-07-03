@@ -8,7 +8,7 @@ $month-box: #00891d;
 
 .datePickerContainer {
   width: 420px;
-  height: 105px;
+  height: 150px;
   background-color: $date-picker-box;
   border-radius: 15px;
   .datePickerItems {
@@ -198,4 +198,12 @@ $month-box: #00891d;
     padding: 5px 8px;
     border-radius: 10px;
   }
+}
+
+.datePickerLang {
+  padding-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 15px;
 }

@@ -4,11 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { collectionDaysOfMonths, mounthListCollection } from "./DatePicker.constant";
 
 import styles from "./DatePicker.module.scss";
-import type { TDayData, TMonthsData, TYearsData, TDatePickerProps } from "./DatePicker.type";
+import type { TDayData, TMonthsData, TYearsData, TDatePickerProps, TSwitchEvent } from "./DatePicker.type";
 
 import { useOutsideClickDatePicker } from "./DatePicker.hook";
+import SwitchToggle from "./components/SwitchToggle";
 
-function DatePicker({ setGetDate = () => {}, setTime = () => {}, datePickerStartYear = 1340 }: TDatePickerProps) {
+function DatePicker({
+  setGetDate = () => {},
+  setTime = () => {},
+  datePickerStartYear = 1340,
+  lang = "fa",
+}: TDatePickerProps) {
   const [openListMonth, setOpenListMonth] = useState<boolean>(false);
   const [openListYear, setOpenListYear] = useState<boolean>(false);
   const [openListDay, setOpenListDay] = useState<boolean>(false);
@@ -19,6 +25,8 @@ function DatePicker({ setGetDate = () => {}, setTime = () => {}, datePickerStart
   const [days, setDays] = useState<TDayData>([]);
   const [months, setMonths] = useState<TMonthsData>([]);
   const [years, setYears] = useState<TYearsData>([]);
+  const [langDate, setLangDate] = useState<"fa" | "en">(lang);
+  const [valueSwitch, setValueSwitch] = useState<boolean>(false);
 
   const dayRef = useRef<HTMLUListElement | null>(null);
   const monthRef = useRef<HTMLUListElement | null>(null);
@@ -137,6 +145,30 @@ function DatePicker({ setGetDate = () => {}, setTime = () => {}, datePickerStart
   useOutsideClickDatePicker(yearRef, "year-layout", () => setOpenListYear(false));
   useOutsideClickDatePicker(datePickerShowRef, "date-picker-layout", () => setOpenDatePicker(false));
 
+  const changeLangHandler = (event: TSwitchEvent) => {
+    const value = event.target.checked;
+    setValueSwitch(value);
+    if (value === false) setLangDate("fa");
+    else setLangDate("en");
+  };
+
+  const handleLang = () => {
+    if (langDate === "fa" && valueSwitch === false) return "فارسی";
+    if (langDate === "en" && valueSwitch === true) return "english";
+    return "فارسی";
+  };
+
+  const languageDatePicker = handleLang();
+
+  const renderShowLang = () => {
+    if (languageDatePicker === "فارسی") {
+      return <span>زبان : {languageDatePicker}</span>;
+    }
+    if (languageDatePicker === "english") {
+      return <span>language : {languageDatePicker}</span>;
+    }
+  };
+
   return (
     <div className={styles.datePicker}>
       <div className={styles.datePickerContainer}>
@@ -159,6 +191,12 @@ function DatePicker({ setGetDate = () => {}, setTime = () => {}, datePickerStart
             <div>
               <span>تاریخ امروز:{getTodayDate}</span>
             </div>
+          </div>
+          <div className={styles.datePickerLang}>
+            <div>
+              <SwitchToggle onChange={changeLangHandler} />
+            </div>
+            <div>{renderShowLang()}</div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 type TYearsData = {
   id: number;
@@ -17,8 +17,11 @@ type TDayData = {
 
 type TDatePickerProps = {
   datePickerStartYear?: number;
+  lang?: "fa" | "en";
   setGetDate: Dispatch<SetStateAction<string>>;
   setTime: Dispatch<SetStateAction<string>>;
 };
 
-export type { TYearsData, TMonthsData, TDayData, TDatePickerProps };
+type TSwitchEvent = ChangeEvent<HTMLInputElement>;
+
+export type { TYearsData, TMonthsData, TDayData, TDatePickerProps, TSwitchEvent };
