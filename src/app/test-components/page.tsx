@@ -10,7 +10,7 @@ function TestPage() {
 
   return (
     <div>
-      <DatePicker setGetDate={setGetDate} setTime={setTime} />
+      <DatePicker setGetDate={setGetDate} setTime={setTime} lang="en"/>
     </div>
   );
 }

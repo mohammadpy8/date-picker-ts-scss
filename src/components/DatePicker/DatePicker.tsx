@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { collectionDaysOfMonths, mounthListCollection } from "./DatePicker.constant";
+import { collectionDaysOfMonths, mounthListCollection, monthListEn } from "./DatePicker.constant";
 
 import styles from "./DatePicker.module.scss";
 import type { TDayData, TMonthsData, TYearsData, TDatePickerProps, TSwitchEvent } from "./DatePicker.type";
@@ -35,6 +35,8 @@ function DatePicker({
 
   const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
+
+  const monthsLang = langDate === "fa" ? mounthListCollection : monthListEn
 
   const persianDate = () => {
     const date = new Date().toLocaleDateString("fa").split("/");
@@ -112,6 +114,11 @@ function DatePicker({
     setIdYear(+convertFaToEn(date_year));
     setIdDay(+convertFaToEn(String(date_day)));
     setTime(getTodayDate);
+    setValueSwitch(() => {
+      if (langDate === "fa") return false;
+      if (langDate === "en") return true;
+      return false;
+    });
   }, []);
 
   const becomeDate = () => {
@@ -194,7 +201,7 @@ function DatePicker({
           </div>
           <div className={styles.datePickerLang}>
             <div>
-              <SwitchToggle onChange={changeLangHandler} />
+              <SwitchToggle onChange={changeLangHandler} valueSwitch={valueSwitch} />
             </div>
             <div>{renderShowLang()}</div>
           </div>
@@ -204,14 +211,14 @@ function DatePicker({
         <div className={styles.dateBoxItems} ref={datePickerShowRef} id="date-picker-layout">
           <div>
             <ul className={styles.dateShowBox} ref={monthRef} id="month-layout">
-              {mounthListCollection.map((item, index) => {
+              {monthsLang.map((item, index) => {
                 return (
                   <li
                     key={index}
                     className={idMonth === item.value ? styles.activeMonth : ""}
                     onClick={() => {
                       setIdMonth(item.value);
-                      setMonths(mounthListCollection.filter((monthCol) => monthCol.value === item.value));
+                      setMonths(monthsLang.filter((monthCol) => monthCol.value === item.value));
                     }}
                   >
                     {item.label}
