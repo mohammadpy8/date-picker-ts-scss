@@ -45,7 +45,7 @@ function DatePicker({
     return [date[0], findNameMonth[0].label, date[2]];
   };
 
-  const generateYear = (): TYearsData => {
+  const generateYear = () : TYearsData => {
     let years = [];
     let startYear = datePickerStartYear;
     let findYear = new Date().toLocaleDateString("fa").split("/")[0];

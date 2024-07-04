@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
+
+import { LoadingLayout } from "@/components";
+
 import "@/scss/globals.scss";
 
 const vazir = Vazirmatn({ subsets: ["arabic"] });
@@ -14,6 +17,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("layout================> page");
+
   return (
     <html lang="fa">
       <body
@@ -22,9 +27,13 @@ export default function RootLayout({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          padding: 0,
+          margin: 0,
         }}
       >
-        <div>{children}</div>
+        <LoadingLayout>
+          <div>{children}</div>
+        </LoadingLayout>
       </body>
     </html>
   );
