@@ -1,6 +1,7 @@
 "use client";
 
 import { DatePicker } from "@/components";
+import Link from "next/link";
 import { useState } from "react";
 
 function TestPage() {
@@ -11,6 +12,7 @@ function TestPage() {
   return (
     <div>
       <DatePicker setGetDate={setGetDate} setTime={setTime} lang="en"/>
+      <Link href="/">home</Link>
     </div>
   );
 }

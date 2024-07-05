@@ -10,10 +10,18 @@ const LoadingLayout: FC<TLoadingLayoutProps> = ({ children }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(true);
-    }, 1500);
+    }, 750);
   }, []);
 
-  return isLoading ? children : <div className={styles.loading}>loading...</div>;
+  return isLoading ? (
+    children
+  ) : (
+    <div className={styles.loading}>
+      <div>
+        <span>loading...</span>
+      </div>
+    </div>
+  );
 };
 
 export { LoadingLayout };
