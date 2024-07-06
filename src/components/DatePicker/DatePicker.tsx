@@ -69,8 +69,8 @@ function DatePicker({
     for (let i = startYear; i <= Number(endYear); i++) {
       if (i >= startYear) {
         years.push({
-          id: i,
-          year: lang === "fa" ? convertEnToFa(String(i)) : convertPersianYearToEn(i),
+          id: langDate === "fa" ? i : convertPersianYearToEn(i),
+          year: langDate === "fa" ? convertEnToFa(String(i)) : convertPersianYearToEn(i),
         });
       }
     }
@@ -99,24 +99,26 @@ function DatePicker({
 
   const generateDays = () => {
     let days = [];
-    const checkMonthsExist = lang === "fa" ? collectionDaysOfMonths : collectionMiladiMonthsDay;
+    const checkMonthsExist = langDate === "fa" ? collectionDaysOfMonths : collectionMiladiMonthsDay;
     const getMonth = months[0]?.label;
     const filterDays = checkMonthsExist.filter((itemDay) => itemDay.months.includes(getMonth));
     const leapYear =
-      lang === "fa"
+      langDate === "fa"
         ? handleLeapYear(filterDays[0]?.days, months[0]?.label)
         : handleLeapMiladiYear(filterDays[0]?.days, months[0]?.label);
     if (filterDays) {
       for (let i = 1; i <= leapYear; i++) {
         days.push({
           id: i,
-          day: lang === "fa" ? convertEnToFa(String(i)) : i,
+          day: langDate === "fa" ? convertEnToFa(String(i)) : i,
         });
       }
     }
 
     return days;
   };
+
+  console.log("day", generateDays(), generateYear());
 
   const yearsData = generateYear();
   const daysData = generateDays();
@@ -178,6 +180,17 @@ function DatePicker({
   useEffect(() => {
     setGetDate(currentDate);
   }, [days, months, years, date_day, date_month, date_year]);
+
+  // useEffect(() => {
+  //   setDays([{ id: +convertFaToEn(String(date_day)), day: date_day }]);
+  //   setMonths([
+  //     { value: mounthListCollection.filter((item) => item.label === date_month)[0].value, label: date_month },
+  //   ]);
+  //   setYears([{ id: +convertFaToEn(date_year), year: date_year }]);
+  //   setIdMonth(mounthListCollection.filter((item) => item.label === date_month)[0].value);
+  //   setIdYear(+convertFaToEn(date_year));
+  //   setIdDay(+convertFaToEn(String(date_day)));
+  // }, [langDate]);
 
   useOutsideClickDatePicker(dayRef, "day-layout", () => setOpenListDay(false));
   useOutsideClickDatePicker(monthRef, "month-layout", () => setOpenListMonth(false));
