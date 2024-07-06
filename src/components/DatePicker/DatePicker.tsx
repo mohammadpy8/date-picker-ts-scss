@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { collectionDaysOfMonths, mounthListCollection, monthListEn } from "./DatePicker.constant";
+import {
+  collectionDaysOfMonths,
+  mounthListCollection,
+  monthListEn,
+  collectionMiladiMonthsDay,
+} from "./DatePicker.constant";
 
 import styles from "./DatePicker.module.scss";
 import type { TDayData, TMonthsData, TYearsData, TDatePickerProps, TSwitchEvent } from "./DatePicker.type";
@@ -36,7 +41,7 @@ function DatePicker({
   const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
-  const monthsLang = langDate === "fa" ? mounthListCollection : monthListEn
+  const monthsLang = langDate === "fa" ? mounthListCollection : monthListEn;
 
   const persianDate = () => {
     const date = new Date().toLocaleDateString("fa").split("/");
@@ -45,7 +50,18 @@ function DatePicker({
     return [date[0], findNameMonth[0].label, date[2]];
   };
 
-  const generateYear = () : TYearsData => {
+  function convertPersianYearToEn(persianYear: number) {
+    const persianEpoch = 621;
+    const solarYearLength = 365.24219;
+
+    let gregorianYear = Math.floor(persianYear + persianEpoch - 3 + persianYear / solarYearLength);
+    if (persianYear % 4 === 0 && (persianYear % 100 !== 0 || persianYear % 400 === 0)) {
+      gregorianYear++;
+    }
+    return gregorianYear;
+  }
+
+  const generateYear = (): TYearsData => {
     let years = [];
     let startYear = datePickerStartYear;
     let findYear = new Date().toLocaleDateString("fa").split("/")[0];
@@ -54,7 +70,7 @@ function DatePicker({
       if (i >= startYear) {
         years.push({
           id: i,
-          year: convertEnToFa(String(i)),
+          year: lang === "fa" ? convertEnToFa(String(i)) : convertPersianYearToEn(i),
         });
       }
     }
@@ -71,18 +87,34 @@ function DatePicker({
     } else return valueDay;
   };
 
+  const handleLeapMiladiYear = (valueDay: number, nameMonth: string): number => {
+    if (nameMonth === "February") {
+      if ((years[0]?.id % 4 === 0 && years[0]?.id % 100 !== 0) || years[0]?.id % 400 === 0) {
+        return valueDay + 1;
+      }
+      return valueDay;
+    }
+    return valueDay;
+  };
+
   const generateDays = () => {
     let days = [];
+    const checkMonthsExist = lang === "fa" ? collectionDaysOfMonths : collectionMiladiMonthsDay;
     const getMonth = months[0]?.label;
-    const filterDays = collectionDaysOfMonths.filter((itemDay) => itemDay.months.includes(getMonth));
+    const filterDays = checkMonthsExist.filter((itemDay) => itemDay.months.includes(getMonth));
+    const leapYear =
+      lang === "fa"
+        ? handleLeapYear(filterDays[0]?.days, months[0]?.label)
+        : handleLeapMiladiYear(filterDays[0]?.days, months[0]?.label);
     if (filterDays) {
-      for (let i = 1; i <= handleLeapYear(filterDays[0]?.days, months[0]?.label); i++) {
+      for (let i = 1; i <= leapYear; i++) {
         days.push({
           id: i,
-          day: convertEnToFa(String(i)),
+          day: lang === "fa" ? convertEnToFa(String(i)) : i,
         });
       }
     }
+
     return days;
   };
 
