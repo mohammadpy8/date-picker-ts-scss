@@ -36,7 +36,7 @@ function DatePicker({
   const convertFaToEn = (s: any) => s.replace(/[۰-۹]/g, (d: string) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
   const convertEnToFa = (s: any) => s.replace(/\d/g, (d: any) => "۰۱۲۳۴۵۶۷۸۹"[d]);
 
-  const monthsLang = langDate === "fa" ? mounthListCollection : monthListEn
+  const monthsLang = langDate === "fa" ? mounthListCollection : monthListEn;
 
   const persianDate = () => {
     const date = new Date().toLocaleDateString("fa").split("/");
@@ -45,7 +45,7 @@ function DatePicker({
     return [date[0], findNameMonth[0].label, date[2]];
   };
 
-  const generateYear = () : TYearsData => {
+  const generateYear = (): TYearsData => {
     let years = [];
     let startYear = datePickerStartYear;
     let findYear = new Date().toLocaleDateString("fa").split("/")[0];
@@ -126,9 +126,9 @@ function DatePicker({
       const year = years[0].year;
       const month = months[0].value;
       const day = days[0].day;
-      const date = `${year}/${month < 10 ? convertEnToFa(String("0" + month)) : convertEnToFa(String(month))}/${
-        convertFaToEn(day) < 10 ? convertEnToFa(String("0" + day)) : day
-      }`;
+      const date = `${year}/${
+        month < 10 ? convertEnToFa(String("0" + month)) : convertEnToFa(String(month))
+      }/${convertFaToEn(day) < 10 ? convertEnToFa(String("0" + day)) : day}`;
       return date;
     }
     return "تاریخ امروز";

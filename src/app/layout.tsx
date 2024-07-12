@@ -14,8 +14,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   console.log("layout================> page");
 
@@ -31,9 +33,8 @@ export default function RootLayout({
           margin: 0,
         }}
       >
-        <LoadingLayout>
-          <div>{children}</div>
-        </LoadingLayout>
+        {children}
+        {modal}
       </body>
     </html>
   );
