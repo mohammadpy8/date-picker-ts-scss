@@ -64,4 +64,10 @@ const monthListEn = [
   { value: 12, label: "December" },
 ];
 
-export { mounthList, mounthListCollection, collectionDaysOfMonths, monthEn, monthListEn };
+const collectionMiladiMonthsDay = [
+  { days: 31, months: ["January", "March", "May", "July", "August", "October", "December"] },
+  { days: 30, months: ["April", "June", "September", "November"] },
+  { days: 28, months: ["February"] },
+];
+
+export { mounthList, mounthListCollection, collectionDaysOfMonths, monthEn, monthListEn, collectionMiladiMonthsDay };
