@@ -2,7 +2,7 @@
   "workbench.colorTheme": "One Dark Pro",
   "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "afterDelay",
-  "editor.fontFamily": "'Fira Code' , 'B Morvarid'",
+  "editor.fontFamily": "'Fira Code' , 'Vazirmatn'",
   "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "window.zoomLevel": 0,
@@ -57,8 +57,8 @@
     "terminalCursor.foreground": "#ffff00",
     // "parameterHints.hintBackground": "#bea04d20",
     // "parameterHints.hintForeground": "#e9c15e"
-    "parameterHints.hintBackground": "#4dadbe20",
-    "parameterHints.hintForeground": "#2abbbb"
+    "parameterHints.hintBackground": "#5fa3af20",
+    "parameterHints.hintForeground": "#1effff"
   },
   "material-icon-theme.folders.color": "#e0ab24",
   "diffEditor.ignoreTrimWhitespace": false,
@@ -187,16 +187,13 @@
   "gitlens.proxy": {},
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.cursorBlinking": "expand",
-  "workbench.settings.applyToAllProfiles": [
-  
-  ],
+  "workbench.settings.applyToAllProfiles": [],
   "terminal.integrated.fontWeight": "normal",
   "git.confirmSync": false,
   "parameterHints.languages": ["php", "javascript", "typescript", "javascriptreact", "typescriptreact"],
-  "parameterHints.padding": "5 5",
+  "parameterHints.padding": "5 6",
   "editor.lineHeight": 25,
-  "parameterHints.hintingType": "variableOnly",
-  "parameterHints.margin": "0 2",
+  "parameterHints.margin": "0 5",
   "black-formatter.path": ["black"],
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.js",
@@ -211,5 +208,6 @@
     "*.db3": "${capture}.${extname}-*",
     "*.sdb": "${capture}.${extname}-*",
     "*.s3db": "${capture}.${extname}-*"
-  }
+  },
+  "tabnine.experimentalAutoImports": true
 }
