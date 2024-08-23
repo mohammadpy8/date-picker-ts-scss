@@ -1,27 +1,24 @@
 {
+  "workbench.colorTheme": "One Dark Pro Vivid",
   "workbench.iconTheme": "material-icon-theme",
   "files.autoSave": "afterDelay",
-  "editor.fontFamily": "'Fira Code' , 'Pelak FA Medium'",
-  "editor.fontSize": 18,
-  // "editor.fontWeight": "500",
-  // "editor.lineHeight": 1.6,
-  // "editor.fontLigature": true,
+  "editor.fontFamily": "'Fira Code' , 'Vazirmatn'",
+  "editor.fontSize": 16,
   "editor.fontLigatures": true,
-  "window.zoomLevel": 0.5,
+  "window.zoomLevel": 0,
   "editor.tokenColorCustomizations": {
     "textMateRules": [
       {
         "scope": [
           "comment",
-          // "",
           "export",
           "function",
           "component",
           "react",
-          "entity.name.type.class", //class names
-          "constant", //String, Number, Boolean…, this, super
-          "storage.modifier", //static keyword
-          "storage.type.class.js" //class keyword
+          "entity.name.type.class",
+          "constant",
+          "storage.modifier",
+          "storage.type.class.js"
         ],
         "settings": {
           "fontStyle": "italic"
@@ -42,42 +39,31 @@
     ]
   },
   "editor.tabSize": 2,
-  "bracketPairColorizer.depreciation-notice": false,
   "editor.formatOnSave": true,
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "always"
   },
-  "indentRainbow.indicatorStyle": "classic",
-  "indentRainbow.lightIndicatorStyleLineWidth": 4,
-  "indentRainbow.errorColor": "rgba(253, 52, 35 ,0.35)",
-  "indentRainbow.tabmixColor": "rgba(128,32,96,0.8)",
-  "indentRainbow.colorOnWhiteSpaceOnly": true,
-  "indentRainbow.colors": [
-    "rgba(99, 50, 252, 0.08)",
-    "rgba(50, 105, 252, 0.08 )",
-    "rgba(50, 191, 252, 0.08 )",
-    "rgba(50, 252, 240, 0.08 )",
-    "rgba(50, 252, 166, 0.08 )",
-    "rgba(151, 252, 50, 0.08 )",
-    "rgba(233, 252, 50, 0.08 )",
-    "rgba(252, 215, 50, 0.08 )",
-    "rgba(252, 154, 50, 0.08 )"
-  ],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
   "security.workspace.trust.untrustedFiles": "open",
   "terminal.integrated.fontFamily": "'Fira Code'",
-  "terminal.integrated.fontWeigth": "",
   "terminal.integrated.fontSize": 14,
-  "tabnine.experimentalAutoImports": true,
   "editor.inlineSuggest.enabled": true,
   "workbench.colorCustomizations": {
+    "tab.activeBackground": "#25282f",
+    "activityBar.background": "#25282f",
+    "editorGroup.background": "#25282f",
+    "sideBar.background": "#25282f",
     "editorCursor.foreground": "#ffff00",
     "terminalCursor.foreground": "#ffff00",
-    "parameterHints.hintBackground": "#37415180",
-    "parameterHints.hintForeground": "#00EFE8"
+    "parameterHints.hintBackground": "#d544f920",
+    "parameterHints.hintForeground": "#d737ff"
   },
+  "material-icon-theme.folders.color": "#8600ea",
   "diffEditor.ignoreTrimWhitespace": false,
-  "prettier.printWidth": 110,
+  "prettier.printWidth": 120,
   "comment-divider.languagesMap": {
     "javascript": ["//"]
   },
@@ -87,7 +73,6 @@
       "color": "#FF2D00",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#123",
       "bold": true,
       "italic": false
     },
@@ -96,7 +81,6 @@
       "color": "#62C3FF",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#123",
       "bold": true,
       "italic": false
     },
@@ -105,7 +89,6 @@
       "color": "#D2D2D2",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#123",
       "bold": true,
       "italic": false
     },
@@ -114,7 +97,6 @@
       "color": "#FF8C00",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#123",
       "bold": true,
       "italic": false
     },
@@ -123,7 +105,6 @@
       "color": "#FFFFFF",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#123",
       "bold": true,
       "italic": true
     },
@@ -132,7 +113,6 @@
       "color": "#98C379",
       "strikethrough": false,
       "underline": false,
-      "backgroundColor": "#123",
       "bold": true,
       "italic": false
     },
@@ -164,15 +144,10 @@
       "italic": false
     }
   ],
-  "editor.matchBrackets": "never",
-  "editor.fontStyle": "italic",
+  "editor.matchBrackets": "always",
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.accessibilitySupport": "off",
-  "CodeGPT.model": "gpt-4",
-  "vscode-pets.throwBallWithMouse": true,
-  "vscode-pets.petSize": "small",
-  "powermode.enabled": true,
 
   "material-icon-theme.languages.associations": {},
   "todo-tree.general.showActivityBarBadge": true,
@@ -181,7 +156,6 @@
       "icon": "check",
       "fontWeight": "bold",
       "background": "#FF8C00",
-      "foreground": "#000000",
       "type": "whole-line",
       "opacity": 0.7
     },
@@ -215,11 +189,26 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.cursorBlinking": "expand",
   "workbench.settings.applyToAllProfiles": [],
-  // "terminal.integrated.fontWeight": "500",
-  "rapidapi.terminalLink.enabled": false,
+  "terminal.integrated.fontWeight": "normal",
   "git.confirmSync": false,
-  "github.copilot.editor.enableAutoCompletions": true,
-  "workbench.colorTheme": "One Dark Pro",
   "parameterHints.languages": ["php", "javascript", "typescript", "javascriptreact", "typescriptreact"],
-  "parameterHints.padding": "4 4"
+  "parameterHints.padding": "5 6",
+  "editor.lineHeight": 25,
+  "parameterHints.margin": "0 5",
+  "black-formatter.path": ["black"],
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+  "tabnine.experimentalAutoImports": true
 }
